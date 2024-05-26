@@ -1,32 +1,32 @@
 {
-	"name": "musicmanager",
-	"version": "0.0.1",
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --check .",
-		"format": "prettier --write ."
-	},
-	"devDependencies": {
-		"@fontsource/fira-mono": "^4.5.10",
-		"@neoconfetti/svelte": "^1.0.0",
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.0.0",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
-		"autoprefixer": "^10.4.19",
-		"postcss": "^8.4.38",
-		"prettier": "^3.1.1",
-		"prettier-plugin-svelte": "^3.1.2",
-		"svelte": "^4.2.7",
-		"svelte-check": "^3.6.0",
-		"tailwindcss": "^3.4.3",
-		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
-		"vite": "^5.0.3"
-	},
-	"type": "module",
-	"packageManager": "pnpm@9.0.6+sha1.648f6014eb363abb36618f2ba59282a9eeb3e879"
+  "name": "example-with-authjs",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "esbuild": "^0.20.2",
+    "next-auth": "^4.24.7",
+    "postcss": "^8.4.38",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.8"
+  },
+  "dependencies": {
+    "@auth/core": "^0.29.0",
+    "@babel/core": "7.24.4",
+    "@solid-mediakit/auth": "^2.0.11",
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.13.3",
+    "@solidjs/start": "^1.0.0",
+    "discord-api-types": "^0.37.85",
+    "solid-js": "^1.8.17",
+    "vinxi": "^0.3.11"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.0.6+sha1.648f6014eb363abb36618f2ba59282a9eeb3e879"
 }

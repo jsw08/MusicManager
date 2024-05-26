@@ -1,38 +1,14 @@
-# create-svelte
+# SolidStart + AuthJS
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+## Setup a Discord app
 
-## Creating a project
+In order to run this example, you need to setup i.e. a Discord app in here: https://discord.com/developers/applications/, to get a client secret and client id which should be added to the .env file. Also, in the Discord app settings under OAuth2, set the Return URL to: http://localhost:3000/api/auth/callback/discord
 
-If you're seeing this, you've probably already done this step. Congrats!
+## AuthJS
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Everything you need to build an [AuthJS](https://authjs.dev/) authenticated Solid project, powered by [`solid-start`](https://start.solidjs.com);
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
 
-## Developing
+Note that Discord is just one of many auth providers supported by Auth.js.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## This project was created with the [Solid CLI](https://solid-cli.netlify.app)
