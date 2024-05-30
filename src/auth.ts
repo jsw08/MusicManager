@@ -1,8 +1,8 @@
-import DiscordProvider from "@auth/core/providers/discord";
-import type { SolidAuthConfig } from "@solid-mediakit/auth";
-import { APIGuild } from 'discord-api-types/v10';
-import { setUser, getUser, db } from "./db";
- 
+import { SvelteKitAuth } from "@auth/sveltekit"
+import Discord from "@auth/sveltekit/providers/discord"
+import { env } from "$env/dynamic/private"
+import { type APIGuild } from 'discord-api-types/v10';
+
 const getGuilds = async (access_token: string): Promise<APIGuild[]> => {
   let guilds: APIGuild[] = [];
 
@@ -18,29 +18,32 @@ const getGuilds = async (access_token: string): Promise<APIGuild[]> => {
     guilds = [];
     console.error(e)
   } 
+  console.log(guilds)
 
   return guilds;
 }
 
-export const authOptions: SolidAuthConfig = {
+export const { handle, signIn, signOut } = SvelteKitAuth({
+  trustHost: true,
   providers: [
-    DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID as string,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
+    Discord({
+      clientId: env.DISCORD_CLIENT_ID,
+      clientSecret: env.DISCORD_CLIENT_SECRET,
       authorization: "https://discord.com/oauth2/authorize?scope=guilds+identify"
-    })
+    }),
   ],
   callbacks: {
     async signIn({account, user}) {
+      console.log(account, user)
       if (!account || !account.access_token) return false
       if (!user.id) return false
 
       let guilds: APIGuild[] = await getGuilds(account.access_token);
-      const inGuild = guilds.some(v => v.id === process.env.DISCORD_GUILD_ID) 
-      if (!inGuild) return false
+      const inguild = guilds.some(v => v.id === env.DISCORD_GUILD_ID) 
+      if (!inguild) return false
 
-      if (!await getUser(user.id)) setUser(user.id)
+      // if (!await getuser(user.id)) setuser(user.id)
       return true
     }
   }
-};
+})
