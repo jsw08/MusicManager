@@ -2,6 +2,8 @@ import { SvelteKitAuth } from "@auth/sveltekit"
 import Discord from "@auth/sveltekit/providers/discord"
 import { env } from "$env/dynamic/private"
 import { type APIGuild } from 'discord-api-types/v10';
+import { db, getUser, setUser } from "./db";
+import { UnstorageAdapter } from "@auth/unstorage-adapter";
 
 const getGuilds = async (access_token: string): Promise<APIGuild[]> => {
   let guilds: APIGuild[] = [];
@@ -18,23 +20,35 @@ const getGuilds = async (access_token: string): Promise<APIGuild[]> => {
     guilds = [];
     console.error(e)
   } 
-  console.log(guilds)
 
   return guilds;
 }
 
 export const { handle, signIn, signOut } = SvelteKitAuth({
-  trustHost: true,
+  adapter: UnstorageAdapter(db),
   providers: [
     Discord({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
       authorization: "https://discord.com/oauth2/authorize?scope=guilds+identify"
-    }),
+    }),    
   ],
+  secret: env.AUTH_SECRET,
+  trustHost: true,
   callbacks: {
+    async jwt({token, user}) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token
+    },
+    async session({session, token}) {
+      if (session.user) {
+        session.user.id = token.id as string;
+      }
+      return session;
+    },
     async signIn({account, user}) {
-      console.log(account, user)
       if (!account || !account.access_token) return false
       if (!user.id) return false
 
@@ -42,8 +56,9 @@ export const { handle, signIn, signOut } = SvelteKitAuth({
       const inguild = guilds.some(v => v.id === env.DISCORD_GUILD_ID) 
       if (!inguild) return false
 
-      // if (!await getuser(user.id)) setuser(user.id)
+      if (!await getUser(user.id)) setUser(user.id)
       return true
     }
   }
 })
+

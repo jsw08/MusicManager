@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@auth/sveltekit": "latest",
+    "@auth/unstorage-adapter": "^2.1.0",
     "discord-api-types": "^0.37.86",
     "unstorage": "^1.10.2"
   },

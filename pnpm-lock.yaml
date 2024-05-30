@@ -11,6 +11,9 @@ importers:
       '@auth/sveltekit':
         specifier: latest
         version: 1.0.1(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(@types/node@20.12.13)))(svelte@4.2.15)(vite@5.2.10(@types/node@20.12.13)))(svelte@4.2.15)
+      '@auth/unstorage-adapter':
+        specifier: ^2.1.0
+        version: 2.1.0(unstorage@1.10.2)
       discord-api-types:
         specifier: ^0.37.86
         version: 0.37.86
@@ -76,11 +79,30 @@ packages:
       nodemailer:
         optional: true
 
+  '@auth/core@0.31.0':
+    resolution: {integrity: sha512-UKk3psvA1cRbk4/c9CkpWB8mdWrkKvzw0DmEYRsWolUQytQ2cRqx+hYuV6ZCsngw/xbj9hpmkZmAZEyq2g4fMg==}
+    peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
+      nodemailer: ^6.8.0
+    peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+      nodemailer:
+        optional: true
+
   '@auth/sveltekit@1.0.1':
     resolution: {integrity: sha512-PNV/r20o1fRNs72CjwMgiw4Ti12BYm/GVpuMbTzNxHE+eZLWuw4MZY05LtMvy9VmN8LWlEKxTmAQKj7nUmYJNA==}
     peerDependencies:
       '@sveltejs/kit': ^1.0.0 || ^2.0.0
       svelte: ^3.54.0 || ^4.0.0 || ^5
+
+  '@auth/unstorage-adapter@2.1.0':
+    resolution: {integrity: sha512-Z1IsA2lfobwVL3+Wu42A/wPl9I9R7dMLv51K86P2HNU+5Uj8U8xi1LI1tZiUWQm4EzfkvUqJHXeu7rNgfgD2tg==}
+    peerDependencies:
+      unstorage: ^1.10.1
 
   '@esbuild/aix-ppc64@0.20.2':
     resolution: {integrity: sha512-D+EBOJHXdNZcLJRBkhENNG8Wji2kgc9AZ9KiPr1JuZjsNtyHzrsfLRrY0tk2H2aoFu6RANO1y1iPPUCDYWkb5g==}
@@ -1441,12 +1463,31 @@ snapshots:
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
 
+  '@auth/core@0.31.0':
+    dependencies:
+      '@panva/hkdf': 1.1.1
+      '@types/cookie': 0.6.0
+      cookie: 0.6.0
+      jose: 5.2.2
+      oauth4webapi: 2.10.3
+      preact: 10.11.3
+      preact-render-to-string: 5.2.3(preact@10.11.3)
+
   '@auth/sveltekit@1.0.1(@sveltejs/kit@2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(@types/node@20.12.13)))(svelte@4.2.15)(vite@5.2.10(@types/node@20.12.13)))(svelte@4.2.15)':
     dependencies:
       '@auth/core': 0.30.0
       '@sveltejs/kit': 2.5.7(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.10(@types/node@20.12.13)))(svelte@4.2.15)(vite@5.2.10(@types/node@20.12.13))
       set-cookie-parser: 2.6.0
       svelte: 4.2.15
+    transitivePeerDependencies:
+      - '@simplewebauthn/browser'
+      - '@simplewebauthn/server'
+      - nodemailer
+
+  '@auth/unstorage-adapter@2.1.0(unstorage@1.10.2)':
+    dependencies:
+      '@auth/core': 0.31.0
+      unstorage: 1.10.2
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
       - '@simplewebauthn/server'
